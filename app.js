@@ -30,7 +30,7 @@ const paymentRouter = require('./routes/paymentRoutes');
 
 
 // swagger
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
