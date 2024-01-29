@@ -1,6 +1,5 @@
 'use strict'
 const appConstants = require('../constants/common');
-const sharp = require('sharp');
 const ffmpeg = require('ffmpeg-static');
 const genThumbnail = require('simple-thumbnail');
 const config = require('../config/config.js');
@@ -45,73 +44,6 @@ const checkObjectNotEmpty = (obj) => {
     return Object.entries(obj).length > 0;
 }
 
-const compressImages = async (data) => {
-    try {
-        let result = await sharp(data.path).resize(data.height ? data.height : 100).toFile(`public/uploads/images/thumbnail/${data.name}`)
-        return `public/uploads/images/thumbnail/${data.name}`
-    } catch (e) {
-        console.log(e)
-        return null
-    }
-};
-
-const compressVideo = (data) => {
-    return new Promise(resolve => {
-        genThumbnail(data.path, 'public/uploads/videos/thumbnail/' + data.name, '150x100', {path: ffmpeg})
-            .then(() => resolve(`public/uploads/videos/thumbnail/${data.name}`))
-            .catch(err => {
-                console.error(err)
-                resolve(null)
-            })
-    })
-};
-
-const mapUploadedForStudio = async function (data, media) {
-    if (media.mimetype && media.mimetype.split('/')[0] === "image") {
-        data.coverImage = {
-            path: media.path,
-            name: media.filename,
-            mediaType: media.mimetype,
-            thumbnail: await compressImages({path: media.path, name: media.filename, height: 720})
-        }
-        return data
-    }
-};
-
-const mapMediaForShow = async function (data, media) {
-    await Promise.all(media.map(async (file) => {
-        if (file.mimetype && file.mimetype.split('/')[0] === "image") {
-            data.images = [{
-                path: file.path,
-                name: file.filename,
-                mediaType: file.mimetype,
-                thumbnail: await compressImages({path: file.path, name: file.filename, height: 720})
-            }]
-            return data
-        } else if (file.mimetype && file.mimetype.split('/')[0] === "video") {
-            data.videos = [{
-                path: file.path,
-                name: file.filename,
-                mediaType: file.mimetype,
-                thumbnail: await compressVideo({path: file.path, name: file.filename})
-            }]
-            return data
-        }
-    }))
-
-};
-
-const mapProfileImage = async function (data, media) {
-    if (media.mimetype && media.mimetype.split('/')[0] === "image") {
-        data.image = {
-            path: media.path,
-            name: media.filename,
-            mediaType: media.mimetype,
-            thumbnail: await compressImages({path: media.path, name: media.filename, height: 720})
-        }
-        return data
-    }
-};
 
 const createNotification = async function (data) {
     try {
@@ -365,11 +297,11 @@ module.exports = {
     sendResponse: sendResponse,
     getReqParams: getReqParams,
     consoleLog: consoleLog,
-    compressImages: compressImages,
+/*    compressImages: compressImages,
     compressVideo: compressVideo,
     mapUploadedForStudio: mapUploadedForStudio,
     mapMediaForShow: mapMediaForShow,
-    mapProfileImage: mapProfileImage,
+    mapProfileImage: mapProfileImage,*/
     createNotification: createNotification,
     /*singleNotification: singleNotification,
     multicastNotification: multicastNotification,
