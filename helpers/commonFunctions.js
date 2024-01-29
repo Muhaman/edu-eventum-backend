@@ -1,7 +1,5 @@
 'use strict'
 const appConstants = require('../constants/common');
-const ffmpeg = require('ffmpeg-static');
-const genThumbnail = require('simple-thumbnail');
 const config = require('../config/config.js');
 
 const moment = require('moment-timezone');
