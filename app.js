@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const db = require('./config/database');
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
-const swaggerDocument = YAML.load('./public/swagger.yaml');
+// const swaggerDocument = YAML.load('./public/swagger.yaml');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const upload = multer();
@@ -30,7 +30,7 @@ const paymentRouter = require('./routes/paymentRoutes');
 
 
 // swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
