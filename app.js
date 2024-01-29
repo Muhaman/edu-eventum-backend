@@ -51,7 +51,9 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true, parameterLimit: 1
 //form-urlencoded
 // for parsing multipart/form-data
 app.use(upload.array());
-
+app.get('/', (req, res) => {
+  res.send('Hey this is my API running 🥳')
+})
 app.use('/', indexRouter)
 app.use('/users', usersRouter);
 app.use('/events', eventRouter);
