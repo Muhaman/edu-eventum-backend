@@ -30,7 +30,7 @@ const paymentRouter = require('./routes/paymentRoutes');
 
 
 // swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,8 +40,8 @@ app.use(logger('dev'));
 // app.use(express.json());
 // app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public/uploads/images')));
+// app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public/uploads/images')));
 
 // for parsing application/json
 app.use(bodyParser.json({limit: '50mb', extended: true, parameterLimit: 100000,}));
